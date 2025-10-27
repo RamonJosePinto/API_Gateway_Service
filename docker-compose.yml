@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  api-gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: api-gateway:dev
+    container_name: api-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SERVER_PORT: "8080"
+
+      # URIs dos serviços (opcional; se não setar, usa os defaults do YAML)
+      AUTH_SERVICE_URI: "http://host.docker.internal:8086"
+      USER_SERVICE_URI: "http://host.docker.internal:8082"
+      EVENT_SERVICE_URI: "http://host.docker.internal:8083"
+      INGRESSOS_SERVICE_URI: "http://host.docker.internal:8081"
+      AVALIACAO_SERVICE_URI: "http://host.docker.internal:8084"
+      NOTIFICATIONS_SERVICE_URI: "http://host.docker.internal:8085"
+
+      # endpoint validate (por body)
+      AUTH_VALIDATE_URL: "http://host.docker.internal:8086/auth/validate"
+
+      # timeouts do filtro (opcional)
+      # APP_AUTH_TIMEOUT_MS: "2500"  # se quiser externalizar
+
+    # Necessário em Docker Linux para resolver host.docker.internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
