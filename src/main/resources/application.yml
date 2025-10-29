@@ -13,6 +13,11 @@ spring:
           predicates:
             - Path=/auth/**
 
+        - id: webhook_publico
+          uri: ${WEBHOOK_SERVICE_URI:http://host.docker.internal:8088}
+          predicates:
+            - Path=/webhook/payment
+
         # Protegidos (passam no filtro TokenValidation)
         - id: usuarios
           uri: ${USER_SERVICE_URI:http://host.docker.internal:8082}
@@ -46,6 +51,13 @@ spring:
           uri: ${NOTIFICATIONS_SERVICE_URI:http://host.docker.internal:8085}
           predicates:
             - Path=/notifications/**
+          filters:
+            - TokenValidation
+        
+        - id: webhook
+          uri: ${WEBHOOK_SERVICE_URI:http://host.docker.internal:8088}
+          predicates:
+            - Path=/webhook/**
           filters:
             - TokenValidation
 
