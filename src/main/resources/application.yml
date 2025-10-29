@@ -24,7 +24,7 @@ spring:
         - id: eventos
           uri: ${EVENT_SERVICE_URI:http://host.docker.internal:8083}
           predicates:
-            - Path=/eventos/**
+            - Path=/eventos/**,/categorias/**
           filters:
             - TokenValidation
 
