@@ -35,4 +35,5 @@ A autenticação é tratada da seguinte forma:
 - **Latência Adicional:** Cada requisição autenticada gera uma chamada extra (Gateway -> Auth-Service). O uso de `WebClient` reativo reduz, mas não elimina esse impacto.
 - **Single Point of Failure:** O Gateway se torna um componente crítico. Caso falhe, todo o tráfego do sistema é afetado.
 - **Dependência do Auth-Service:** Se o serviço de autenticação estiver lento ou indisponível, todo o fluxo de validação é prejudicado.
-- **Risco de Cabeçalhos Forjados:** É essencial garantir que os microsserviços internos aceitem apenas chamadas vindas do Gateway, bloqueando acesso direto externo.
+- **Risco de Cabeçalhos Forjados:** É essencial garantir que os microsserviços internos aceitem apenas chamadas vin
+- das do Gateway, bloqueando acesso direto externo.
